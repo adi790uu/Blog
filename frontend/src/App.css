@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+}
+/* 
+.Nav {
+  padding: 10px;
+  height: 75px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3f3b3b;
+  color: #f9f9f9;
+  border-bottom: #333;
+}
+.Nav ul {
+  margin-right: 20px;
+  width: 15%;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+.Nav a {
+  text-decoration: none;
+  color: white;
+}
+.Nav input {
+  width: 30%;
+  height: 38px;
+  padding: 10px;
+  border-radius: 5px;
+  letter-spacing: 1.5px;
+} */

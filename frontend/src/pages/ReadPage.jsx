@@ -1,70 +1,6 @@
-// import React, { useEffect } from 'react';
-// import { useLocation, useParams } from 'react-router-dom';
-// import api from '../api';
-// import myImage from '../images/download.jpeg';
-// import { useState } from 'react';
-// const ReadPage = () => {
-//   const { postId } = useParams();
-//   console.log(postId);
-//   const [post, setPost] = useState({});
-//   const [date, setDate] = useState('');
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const token = localStorage.getItem('token');
-//       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-//       const response = await api.get(`/posts/${postId}`);
-//       // console.log(response.data);
-//       setPost(response.data.post);
-//       const newDate1 = response.data.post.createdAt;
-//       const newDate2 = newDate1.split('T');
-
-//       setDate(newDate2[0]);
-//       //   console.log(newDate1);
-//       //   const newDate2 = new Date(newDate1);
-//       //   const formattedDate = newDate2.toLocaleDateString.String();
-//       //   setDate(formattedDate);
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   return (
-//     <div className="flex flex-col items-center bg-slate-50">
-//       <h1 className="text-5xl font-medium text-center mt-28 mb-28">
-//         {post.title}
-//       </h1>
-//       <img src={myImage} className="w-96 h-96 mb-24 " loading="lazy" />
-
-//       <div className="flex justify-evenly w-2/3 align-items-center">
-//         {post.author && (
-//           <span className="font-md text-md font-semibold">
-//             Written by: {post.author.username}
-//           </span>
-//         )}
-//         <span className="italic font-semibold text-md">Published: {date}</span>
-//       </div>
-//       <p className="mt-20 mb-20 p-10 text-center spa leading-8 font-sans text-lg">
-//         {post.content} safsdfasjfjsadfjsdjfjsdfjjdfjdff Lorem ipsum dolor sit,
-//         amet consectetur adipisicing elit. Architecto eveniet ad voluptatem
-//         laborum voluptatum in repudiandae illo sit cum, quam praesentium
-//         mollitia asperiores placeat. Dolore, eius ut. Optio obcaecati nostrum
-//         maxime nulla porro, quidem dicta saepe voluptas dolor reiciendis modi
-//         eum commodi cumque totam ea, voluptatibus veritatis eaque possimus
-//         consequatur est odio delectus? Itaque officia eaque ratione odit fugit.
-//         Quos libero ad molestiae? Quibusdam vitae itaque tenetur nulla nemo
-//         totam voluptatum adipisci repellendus animi perferendis dolore incidunt
-//         voluptatibus fugit quidem aut, obcaecati delectus distinctio non sint
-//         velit quisquam sequi veniam. Necessitatibus rerum aperiam ipsam,
-//         consequatur impedit fuga optio cupiditate ullam.
-//       </p>
-//     </div>
-//   );
-// };
-
-// export default ReadPage;
-
 import React, { useEffect, useRef } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
+import Comment from '../components/Comment';
 import api from '../api';
 import DOMPurify from 'dompurify';
 import myImage from '../images/download.jpeg';
@@ -76,6 +12,7 @@ const ReadPage = () => {
   const [date, setDate] = useState('');
   const [comment, setComment] = useState('');
   const contentRef = useRef(null);
+  const [comm, setComm] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -86,6 +23,8 @@ const ReadPage = () => {
       const newDate1 = response.data.post.createdAt;
       const newDate2 = newDate1.split('T');
       setDate(newDate2[0]);
+      setComm(response.data.post.comments);
+      // console.log(response.data.post.comments);
     };
 
     fetchData();
@@ -95,7 +34,8 @@ const ReadPage = () => {
     if (contentRef.current) {
       contentRef.current.innerHTML = DOMPurify.sanitize(post.content);
     }
-  }, [post]);
+    console.log(comm);
+  }, [post, comm]);
 
   const commentChange = e => {
     setComment(e.target.value);
@@ -140,7 +80,7 @@ const ReadPage = () => {
         <h1 className="mb-10 text-lg font-semibold text-slate-200">
           Comments :
         </h1>
-        <div className="flex-shrink-0 mb-4 md:mr-8 ">
+        <div className="flex-shrink-0 mb-4 md:mr-8 flex justify-center items-center">
           <img
             src={myImage}
             alt="Profile"
@@ -160,6 +100,16 @@ const ReadPage = () => {
           >
             Post
           </button>
+        </div>
+        <div className="flex flex-col justify-center items-center mx-auto">
+          {comm.map(comment => (
+            <Comment
+              key={comment._id}
+              author={comment.author.username}
+              createdAt={comment.createdAt}
+              content={comment.content}
+            />
+          ))}
         </div>
       </div>
     </>

@@ -16,7 +16,14 @@ const getPost = async (req, res) => {
 
   const post = await Post.findById(postId)
     .populate('comments')
-    .populate('author');
+    .populate('author')
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    });
 
   if (post) {
     return res.json({ msg: 'Post found', post: post });

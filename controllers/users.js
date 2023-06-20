@@ -49,11 +49,20 @@ const authUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   const userId = req.user;
+  const keyword = req.query.keyword;
+  let user;
 
-  const user = await User.findById(userId)
-    .populate('likes')
-    .populate('favorites')
-    .populate('postsCreated');
+  if (keyword) {
+    user = await User.findById(keyword)
+      .populate('likes')
+      .populate('favorites')
+      .populate('postsCreated');
+  } else {
+    user = await User.findById(userId)
+      .populate('likes')
+      .populate('favorites')
+      .populate('postsCreated');
+  }
 
   if (user) {
     return res.json({ msg: 'Success', user: user });

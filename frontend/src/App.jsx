@@ -23,6 +23,7 @@ function App() {
           <Route path="/create" element={<TextEditor />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/update/:postId" element={<Update />}></Route>
+          <Route path="/profile/:userId" element={<Profile />}></Route>
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>

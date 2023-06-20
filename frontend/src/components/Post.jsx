@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const PostCard = props => {
   const postId = `/readArticle/${props.id}`;
+  const userId = `/profile/${props.creator}`;
   const navigate = useNavigate();
   const [likes, setLikes] = useState(props.likes);
   const [count, setCount] = useState(0);
@@ -47,7 +48,7 @@ const PostCard = props => {
         </div>
         <div className="p-14 space-y-4 md:space-y-2 flex flex-col items-center justify-center bg-slate-300">
           <a
-            href="#"
+            href={userId}
             className="text-slate-700 underline cursor-pointer relative bottom-7 italic font-medium tracking-wide"
           >
             Author: {props.author}

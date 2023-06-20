@@ -5,17 +5,18 @@ import { useState } from 'react';
 import myImage from '../images/download.jpeg';
 import Post from '../components/Post';
 import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
+  const { userId } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      const response = await api.get('/users/user');
+      const response = await api.get(`/users/user?keyword=${userId}`);
       console.log(response);
       setProfile(response.data.user);
     };

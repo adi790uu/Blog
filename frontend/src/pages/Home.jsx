@@ -67,7 +67,7 @@ const Home = () => {
             key={post._id}
             id={post._id}
             title={post.title}
-            creator={post.author}
+            creator={post.author._id}
             content={post.content}
             author={post.author.username}
             likes={post.likes}

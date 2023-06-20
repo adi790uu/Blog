@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import Comment from '../components/Comment';
 import api from '../api';
 import DOMPurify from 'dompurify';
@@ -13,6 +13,7 @@ const ReadPage = () => {
   const [comment, setComment] = useState('');
   const contentRef = useRef(null);
   const [comm, setComm] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +54,8 @@ const ReadPage = () => {
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     const response = await api.post(`/feedback/comment/${postId}`, data);
     console.log(response);
-    alert('Comment posted!');
+    // alert('Comment posted!');
+    window.location.reload(false);
   };
 
   return (

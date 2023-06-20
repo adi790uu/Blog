@@ -12,7 +12,6 @@ const getAllPosts = async (req, res) => {
 
 const getPost = async (req, res) => {
   const postId = req.params.id;
-  // console.log(postId);
 
   const post = await Post.findById(postId)
     .populate('comments')
@@ -84,22 +83,10 @@ const getSearchedResult = async (req, res) => {
 
   const filteredPosts = posts.filter(post => post.author !== null);
 
-  // console.log(filteredPosts);
-
-  // const searchResult1 = await User.find({
-  //   username: { $regex: keyword, $options: 'i' },
-  // });
-
   const searchResult2 = await Post.find({
     title: { $regex: keyword, $options: 'i' },
-  });
+  }).populate('author');
 
-  // console.log(searchResult1);
-  // console.log(searchResult2);
-
-  // if (searchResult) {
-  //   return res.json({ msg: 'Success', results: searchResult });
-  // }
   if (searchResult2 || filteredPosts) {
     return res.json({
       msg: 'Success',

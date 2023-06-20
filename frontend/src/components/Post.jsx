@@ -1,31 +1,13 @@
 // import React from 'react';
 import myImage from '../images/download.jpeg';
 import api from '../api';
-
-// const Post = props => {
-//   return (
-//     <div className="flex flex-col justify-center items-center m-40 border-solid border-black p-10">
-//       <a
-//         href="/post"
-//         className="linker flex flex-col items-center justify-center w-screen"
-//       >
-//         <div className="w-100">
-//           <img src={myImage} className="w-96"></img>
-//         </div>
-//         <h2 className="text-4xl font-medium text-black p-6">Title</h2>
-//       </a>
-//       <p className="text-black description">Content</p>
-//     </div>
-//   );
-// };
-
-// export default Post;
-
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PostCard = props => {
   const postId = `/readArticle/${props.id}`;
+  const navigate = useNavigate();
   const [likes, setLikes] = useState(props.likes);
   const [count, setCount] = useState(0);
 
@@ -47,6 +29,10 @@ const PostCard = props => {
     } else {
       alert('Already liked the post');
     }
+  };
+
+  const clickHandler = () => {
+    navigate(postId);
   };
 
   return (
@@ -92,7 +78,10 @@ const PostCard = props => {
               </button>
             </div>
             <div>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button
+                onClick={clickHandler}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
                 Learn More
               </button>
             </div>

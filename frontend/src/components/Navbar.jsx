@@ -11,18 +11,7 @@ const Navbar = () => {
     <nav className="flex items-center justify-between bg-blue-500 text-white py-2 md:py-4 px-4 md:px-6 sticky top-0 z-10">
       <h2 className="text-xl md:text-2xl font-bold">BLOGG</h2>
 
-      <div className="relative flex items-center">
-        <input
-          className="bg-white text-gray-700 rounded-md py-1 md:py-2 px-3 md:px-4 md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-          type="text"
-          placeholder="Search by Author or Title"
-        />
-        <button className="ml-2 bg-blue-700 text-white px-3 py-1 md:px-4 md:py-2 rounded-md hover:bg-blue-600 transition-colors duration-300">
-          Search
-        </button>
-      </div>
-
-      <ul className="flex space-x-4 hidden md:flex">
+      <ul className="space-x-4 hidden md:flex">
         <a href="/home" className="hover:text-gray-200">
           <li className="transition-colors duration-300">Home</li>
         </a>

@@ -1,7 +1,4 @@
 import React from 'react';
-import api from '../api';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import image from '../images/download.jpeg';
 const Comment = props => {
   const username = props.author;

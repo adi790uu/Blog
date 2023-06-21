@@ -24,6 +24,28 @@ const postLike = async (req, res) => {
   res.json({ msg: 'Error occured' });
 };
 
+const removeLike = async (req, res) => {
+  const postId = req.params.postId;
+  const userId = req.user;
+  const post = await Post.updateOne({ _id: postId }, { $inc: { likes: -1 } });
+  const likesArrayInUser = await User.updateOne(
+    { _id: userId },
+    { $push: { likes: postId } },
+  );
+
+  const updatedPost = await Post.findById(postId);
+
+  if (post && likesArrayInUser) {
+    return res.json({
+      msg: 'Success',
+      updatedPost: updatedPost,
+      userInfo: likesArrayInUser,
+    });
+  }
+
+  res.json({ msg: 'Error occured' });
+};
+
 const postComment = async (req, res) => {
   const postId = req.params.postId;
   console.log(postId);
@@ -63,4 +85,4 @@ const postFavorite = async (req, res) => {
   res.json({ msg: 'Failed' });
 };
 
-module.exports = { postLike, postComment, postFavorite };
+module.exports = { postLike, postComment, postFavorite, removeLike };

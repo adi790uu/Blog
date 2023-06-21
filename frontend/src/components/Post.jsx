@@ -28,7 +28,12 @@ const PostCard = props => {
       setLikes(response.data.updatedPost.likes);
       setCount(1);
     } else {
-      alert('Already liked the post');
+      // alert('Already liked the post');
+      const token = localStorage.getItem('token');
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      const response = await api.post(`/feedback/removeLike/${props.id}`);
+      setLikes(response.data.updatedPost.likes);
+      setCount(0);
     }
   };
 

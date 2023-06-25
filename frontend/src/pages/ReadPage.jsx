@@ -76,8 +76,9 @@ const ReadPage = () => {
             Published: {date}
           </span>
         </div>
-        <div ref={contentRef} className="mt-20 mb-20 p-10 spa leading-8"></div>
       </div>
+
+      <div ref={contentRef} className="mt-20 mb-20 p-10 leading-8"></div>
       <div className="p-10 w-full bg-slate-700">
         <h1 className="mb-10 text-lg font-semibold text-slate-200">
           Comments :

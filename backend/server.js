@@ -6,11 +6,7 @@ const url = process.env.URL;
 const dbStart = require('./config/db');
 const cors = require('cors');
 
-app.use(
-  cors({
-    origin: '*',
-  }),
-);
+app.use(cors());
 app.use(express.json());
 app.use('/api/v1/users', require('./routes/userRoutes'));
 app.use('/api/v1/test', require('./routes/testroute'));
